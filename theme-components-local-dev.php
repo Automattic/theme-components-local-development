@@ -12,6 +12,8 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: theme-components-local-dev
 */
 
+register_deactivation_hook( __FILE__, array( 'Theme_Components_Dev_Plugin', 'on_deactivation' ) );
+
 class Theme_Components_Dev_Plugin {
 	var $repo_directory = 'theme-components';
 	var $repo_file_name = 'theme-components-master.zip';
@@ -96,8 +98,27 @@ class Theme_Components_Dev_Plugin {
 			 wp_die( __( 'Error: ' . $URI . ' file was not able to be deleted.', 'theme-components-local-dev' ) );
 		}
 	}
+
+	public static function on_deactivation() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
+		check_admin_referer( "deactivate-plugin_{$plugin}" );
+		components_local_dev_kthanxbye();
+	}
 }
 
 if ( ! is_admin() ) {
 	new Theme_Components_Dev_Plugin;
+}
+
+/**
+ * This deletes the local zip if it's there when plugin goes away for some reason.
+ */
+function components_local_dev_kthanxbye() {
+	$file = $_SERVER['DOCUMENT_ROOT'] . '/' . 'theme-components-master.zip';
+	if ( file_exists( $file ) ) {
+		unlink( $file );
+	}
 }
