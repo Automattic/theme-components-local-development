@@ -95,7 +95,7 @@ class Theme_Components_Dev_Plugin {
 	}
 
 	public function add_badge() {
-		$this->badge_content = '<div style="background:#cd7c3a;border-radius:4px;color:#ffffff;padding:4px;position:fixed;bottom:8px;left:8px;text-align:center"><code><small><span class="dashicons dashicons-warning" style="position:relative;bottom:-6px;margin-right:4px;"></span>' . esc_html__( 'You&rsquo;re running a local copy of Components.', 'theme-components-local-dev' ) . '</small></code></div>';
+		$this->badge_content = '<div style="background:#cd7c3a;border-radius:4px;color:#ffffff;padding:4px;position:fixed;bottom:8px;left:8px;text-align:center"><code><small><span class="dashicons dashicons-warning" style="position:relative;bottom:-6px;margin-right:4px;"></span>' . esc_html__( 'Local Components running.', 'theme-components-local-dev' ) . '</small></code></div>';
 		echo $this->badge_content;
 	}
 
