@@ -17,6 +17,7 @@ register_deactivation_hook( __FILE__, array( 'Theme_Components_Dev_Plugin', 'on_
 class Theme_Components_Dev_Plugin {
 	var $repo_directory = 'theme-components';
 	var $repo_file_name = 'theme-components-master.zip';
+	var $badge_content;
 
 	function __construct() {
 		// We're in local dev mode, so create and add that filter. Used by the Components generator.
@@ -25,6 +26,9 @@ class Theme_Components_Dev_Plugin {
 
 		// Apply the filter to bypass the generator's cache. This makes the generator rebuild themes on every page load.
 		add_filter( 'components_bypass_cache', '__return_true' );
+
+		// We're in local dev mode, so add a badge.
+		add_action( 'wp_footer', array( $this, 'add_badge' ) );
 
 		// Let's run an init function to set things up.
 		// Using a low priority to make sure it runs before other actions.
@@ -88,6 +92,11 @@ class Theme_Components_Dev_Plugin {
 		} else {
 			wp_die( __( 'Error: <code>' . $zip_directory . '</code> directory does not exist. Make sure you put a copy of <a href="https://github.com/Automattic/theme-components" target="_blank">Theme Components</a> in the root of your WordPress install so you can develop Components locally.', 'theme-components-local-dev' ) );
 		}
+	}
+
+	public function add_badge() {
+		$this->badge_content = '<div style="background:#cd7c3a;border-radius:4px;color:#ffffff;padding:4px;position:fixed;bottom:8px;left:8px;text-align:center"><code><small><span class="dashicons dashicons-warning" style="position:relative;bottom:-6px;margin-right:4px;"></span>' . esc_html__( 'You&rsquo;re running a local copy of Components.', 'theme-components-local-dev' ) . '</small></code></div>';
+		echo $this->badge_content;
 	}
 
 	/**
