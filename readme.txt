@@ -19,10 +19,10 @@ To install:
 
 e.g.
 
-1. Place a local copy of [Components]( https://github.com/Automattic/theme-components) to the root of your WordPress install.
+1. Place a local copy of [Components]( https://github.com/Automattic/theme-components) in the root of your WordPress install.
 2. Upload `theme-components-local-dev` directory to the `/wp-content/plugins/` directory.
 3. Make sure you have the [Components site theme](https://github.com/Automattic/components.underscores.me) active.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
+4. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Frequently Asked Questions ==
 
