@@ -21,7 +21,6 @@ class Theme_Components_Dev_Plugin {
 
 	function __construct() {
 		// We're in local dev mode, so create and add that filter. Used by the Components generator.
-		$this->local_dev = apply_filters( 'components_local_dev', true );
 		add_filter( 'components_local_dev', '__return_true' );
 
 		// Apply the filter to bypass the generator's cache. This makes the generator rebuild themes on every page load.
