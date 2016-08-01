@@ -15,11 +15,15 @@ Text Domain: theme-components-local-dev
 register_deactivation_hook( __FILE__, array( 'Theme_Components_Dev_Plugin', 'on_deactivation' ) );
 
 class Theme_Components_Dev_Plugin {
-	var $repo_directory = 'theme-components';
-	var $repo_file_name = 'theme-components-master.zip';
+	var $repo_directory;
+	var $repo_file_name;
 	var $badge_content;
 
 	function __construct() {
+		// Set intance variables.
+		$this->repo_directory = ABSPATH . 'theme-components';
+		$this->repo_file_name = ABSPATH . 'theme-components-master.zip';
+
 		// We're in local dev mode, so create and add that filter. Used by the Components generator.
 		add_filter( 'components_local_dev', '__return_true' );
 
@@ -34,6 +38,9 @@ class Theme_Components_Dev_Plugin {
 		add_action( 'init', array( $this, 'components_local_dev_init' ), 1 );
 	}
 
+	/**
+	 * Fire the main functions, managing the zip file.
+	 */
 	public function components_local_dev_init() {
 
 		// If the local zip file exist from a previous test, delete it.
