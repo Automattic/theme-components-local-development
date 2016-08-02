@@ -62,7 +62,7 @@ class Theme_Components_Dev_Plugin {
 
 			// Initialize archive object.
 			$zip = new ZipArchive();
-			$zip->open( 'theme-components-master.zip', ZipArchive::CREATE && ZipArchive::OVERWRITE );
+			$zip->open( $this->repo_file_name, ZipArchive::CREATE && ZipArchive::OVERWRITE );
 
 			// Files and directories to ignore.
 			$exclude_files = array( '.git', '.svn', '.DS_Store', '.', '..' );
