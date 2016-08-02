@@ -56,7 +56,7 @@ class Theme_Components_Dev_Plugin {
 	 * This zips local Components repo.
 	 */
 	public function zippity_zip_directory( $zip_directory ) {
-		if ( file_exists( $zip_directory ) && is_dir( $zip_directory ) ) {
+		if ( is_dir( $zip_directory ) ) {
 			// Get real path for our folder.
 			$root_path = realpath( $zip_directory );
 
