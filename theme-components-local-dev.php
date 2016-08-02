@@ -79,7 +79,7 @@ class Theme_Components_Dev_Plugin {
 					continue;
 				}
 				foreach ( $exclude_directories as $directory )
-					if ( strstr( $file, "/{$directory}/" ) ) {
+					if ( false !== strstr( $file, "/{$directory}/" ) ) {
 						continue 2; // continue the parent foreach loop
 					}
 				// Skip directories (they would be added automatically).
