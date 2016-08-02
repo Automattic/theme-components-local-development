@@ -114,26 +114,29 @@ class Theme_Components_Dev_Plugin {
 		}
 	}
 
+	/**
+	 * This deletes the local zip if it's there when plugin goes away for some reason.
+	 */
+	public static function delete_zip_kthanxbye() {
+		$file = $_SERVER['DOCUMENT_ROOT'] . '/' . 'theme-components-master.zip';
+		if ( file_exists( $file ) ) {
+			unlink( $file );
+		}
+	}
+
+	/**
+	 * Runs on plugin deativation for clean-up purposes.
+	 */
 	public static function on_deactivation() {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
 		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
 		check_admin_referer( "deactivate-plugin_{$plugin}" );
-		components_local_dev_kthanxbye();
+		self::delete_zip_kthanxbye();
 	}
 }
 
 if ( ! is_admin() ) {
 	new Theme_Components_Dev_Plugin;
-}
-
-/**
- * This deletes the local zip if it's there when plugin goes away for some reason.
- */
-function components_local_dev_kthanxbye() {
-	$file = $_SERVER['DOCUMENT_ROOT'] . '/' . 'theme-components-master.zip';
-	if ( file_exists( $file ) ) {
-		unlink( $file );
-	}
 }
